@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const bottomContainerHeight = 80.0;
+const activeCardColor = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -18,29 +22,35 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33)),
+                  child: ReusableCard(colour: activeCardColor),
                 ),
                 Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33)),
+                  child: ReusableCard(colour: activeCardColor),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(colour: Color(0xFF1D1E33)),
+            child: ReusableCard(colour: activeCardColor),
           ),
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33)),
+                  child: ReusableCard(colour: activeCardColor),
                 ),
                 Expanded(
-                  child: ReusableCard(colour: Color(0xFF1D1E33)),
+                  child: ReusableCard(colour: activeCardColor),
                 ),
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(top: 10.0),
+            height: bottomContainerHeight,
+            width: double.infinity,
+            color: bottomContainerColor,
+          )
         ],
       )
     );
@@ -49,14 +59,16 @@ class _InputPageState extends State<InputPage> {
 
 class ReusableCard extends StatelessWidget {
 
-  final Color? colour;
+  final Color colour;
+  final cardChild;
 
   // the constructor
-  ReusableCard({this.colour});
+  ReusableCard({required this.colour, this.cardChild});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: cardChild,
     margin: EdgeInsets.all(15.0),
     decoration: BoxDecoration(
         color: colour,
