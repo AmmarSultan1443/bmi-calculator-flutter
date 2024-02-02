@@ -40,6 +40,11 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       child: ReusableCard(
+                        onPress: () {
+                          setState(() {
+                            selectedGender = Gender.male;
+                          });
+                        },
                         colour: selectedGender == Gender.male ? activeCardColor : inactiveCardColor,
                         cardChild: IconContent(
                           icon: FontAwesomeIcons.mars,
@@ -56,6 +61,12 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       child: ReusableCard(
+                        // Anonymous CallBack () {}
+                        onPress: () {
+                          setState(() {
+                            selectedGender = Gender.female;
+                          });
+                        },
                         colour: selectedGender == Gender.female ? activeCardColor : inactiveCardColor,
                         cardChild: IconContent(
                           icon: FontAwesomeIcons.venus,
@@ -68,16 +79,16 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Expanded(
-              child: ReusableCard(colour: activeCardColor),
+              child: ReusableCard(onPress: () {}, colour: activeCardColor),
             ),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReusableCard(colour: activeCardColor),
+                    child: ReusableCard(onPress: () {}, colour: activeCardColor),
                   ),
                   Expanded(
-                    child: ReusableCard(colour: activeCardColor),
+                    child: ReusableCard(onPress: () {}, colour: activeCardColor),
                   ),
                 ],
               ),
