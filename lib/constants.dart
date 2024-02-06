@@ -16,3 +16,9 @@ const kDigitsTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w900,
 );
+
+const int maxWeight = 300;
+const int minWeight = 1;
+
+const int maxAge = 110;
+const int minAge = 1;
