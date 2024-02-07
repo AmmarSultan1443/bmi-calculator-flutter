@@ -1,8 +1,11 @@
+import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_content.dart';
-import 'reusable_card.dart';
-import 'constants.dart';
+import '../components/icon_content.dart';
+import '../components/reusable_card.dart';
+import '../constants.dart';
+import '../components/bottom_button.dart';
+import 'package:bmi_calculator/components/rounded_icon_button.dart';
 
 // to initialize an instance with this enum and having nothing selected at the
 // same time. none value was added.
@@ -103,7 +106,7 @@ class _InputPageState extends State<InputPage> {
                       trackHeight: 0.8,
                       overlayColor: Color(0x26EB1555),
                       overlayShape: RoundSliderOverlayShape(
-                        overlayRadius: 30.0,
+                        overlayRadius: 20.0,
                       ),
                     ),
                     child: Slider(
@@ -135,9 +138,20 @@ class _InputPageState extends State<InputPage> {
                           'WEIGHT',
                           style: kLabelTextStyle,
                         ),
-                        Text(
-                          weight.toString(),
-                          style: kDigitsTextStyle,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          textBaseline: TextBaseline.alphabetic,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            Text(
+                              weight.toString(),
+                              style: kDigitsTextStyle,
+                            ),
+                            Text(
+                              'KG',
+                              style: kLabelTextStyle,
+                            )
+                          ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -149,7 +163,9 @@ class _InputPageState extends State<InputPage> {
                                     if (weight > minWeight) weight--;
                                   });
                                 }),
-                            SizedBox(width: 20.0,),
+                            SizedBox(
+                              width: 15.0,
+                            ),
                             RoundedIconButton(
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
@@ -189,7 +205,9 @@ class _InputPageState extends State<InputPage> {
                                     if (age > minAge) age--;
                                   });
                                 }),
-                            SizedBox(width: 20.0,),
+                            SizedBox(
+                              width: 15.0,
+                            ),
                             RoundedIconButton(
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
@@ -207,49 +225,15 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/result');
+          BottomButton(
+            title: 'CALCULATE',
+            onPress: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResultPage()));
             },
-            child: Container(
-              margin: EdgeInsets.only(top: 10.0),
-              height: kBottomContainerHeight,
-              width: double.infinity,
-              color: kBottomContainerColor,
-              child: Center(
-                child: Text('CALCULATE', style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white
-                ),),
-              ),
-            ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class RoundedIconButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  RoundedIconButton({required this.icon, required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      // knowing what action to do based on the sign passed by argument
-      onPressed: onPressed,
-      elevation: 6.0,
-      child: Icon(icon),
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
     );
   }
 }
